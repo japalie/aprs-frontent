@@ -22,12 +22,15 @@ APRS Web GUI
 * API (JSON)
 * Captcha Verification
 
+# Idea
+
+
+# Technical
 
 ## Tested on
 
 * Centos / RHEL 7 with Apache and PHP 7.4
 * Windows 10 with Apache (Xampp) and PHP 7.3
-
 
 ## Dependencies
 
@@ -60,7 +63,6 @@ APRS Web GUI
 * MAP
   * [OpenStreetMap](https://www.openstreetmap.org/)
   * [OpenMapTiles](https://openmaptiles.org/)
-
 
 ## Installation (CentOS/RHEL)
 
@@ -135,4 +137,28 @@ CREATE TABLE `filter` (
 ALTER TABLE `filter`
   ADD PRIMARY KEY (`callsign`);
 COMMIT;
+```
+
+**Edit config.php**
+Edit the file `/var/www/html/config.php` to your needs.
+Example:
+```
+<?php
+$_CONFIG = array();
+
+//Datenbankkonfiguration
+$_CONFIG["db"]["db"] = "aprs";	// Database
+$_CONFIG["db"]["user"] = "root"; // DB-User
+$_CONFIG["db"]["pass"] = "********"; //DB-Password
+$_CONFIG["db"]["host"] = "10.0.0.141"; //DB-IP
+
+$_CONFIG["db"]["packettable"] = "packets"; //Packet Table
+$_CONFIG["db"]["filtertable"] = "filter"; //Filter Table
+
+//APRS Spezifische Einstellungen
+$_CONFIG["aprs"]["maxage"] = 60; // in minutes
+$_CONFIG["aprs"]["maxrecords"] = 1000; // max shown objects
+$_CONFIG["aprs"]["purgeafter"] = 48; // in hours
+$_CONFIG["aprs"]["sessionkey"] = "********"; // For Session Encryption
+?>
 ```
