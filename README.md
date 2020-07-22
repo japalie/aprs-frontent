@@ -1,7 +1,26 @@
 # aprs-frontent
 APRS Web GUI
 
+![Screenshot](https://github.com/japalie/aprs-frontent/blob/master/readme/Screen1.png?raw=true)
 
+![Screenshot](https://github.com/japalie/aprs-frontent/blob/master/readme/Screen2.png?raw=true)
+
+![Screenshot](https://github.com/japalie/aprs-frontent/blob/master/readme/Screen4.png?raw=true)
+
+**Functions**
+* "Offline" Map Support (You need a Connection to the Webserver, localhost is engough)
+* Login function
+* Callsign Filtering (From / Via)
+* Callsign Filtering (DB and View)
+* Follow Objects
+* Periodic Updates
+* Display Tracks
+* Display WX Data
+* Display Speed / Course
+* Raw Data View
+* Message View
+* API (JSON)
+* Captcha Verification
 
 
 ## Tested on
@@ -21,7 +40,7 @@ APRS Web GUI
 * MySQL or MariaDB
 * For "Offline" Maps
   * Docker
-  * [https://openmaptiles.org/](OpenMapTiles)
+  * [https://openmaptiles.com/server/](OpenMapTiles)
 
 ## Sources
 
@@ -38,11 +57,14 @@ APRS Web GUI
 * PHP Librarys
   * [APRS Passcode Generator](https://github.com/magicbug/PHP-APRS-Passcode)
   * [GeoIP](https://www.ip2location.com/development-libraries/ip2location/php)
+* MAP
+  * [OpenStreetMap](https://www.openstreetmap.org/)
+  * [OpenMapTiles](https://openmaptiles.org/)
 
 
 ## Installation (CentOS/RHEL)
 
-** Apache and MariaDB **
+**Apache and MariaDB**
 ```
 sudo yum install httpd mod_proxy_html mariadb-server -y
 
@@ -69,14 +91,12 @@ echo "<VirtualHost *:80>
 
 ```
 
-
-
 Add the following line under the Topic `[mysqld]` in /etc/my.cnf
 ```
 skip-name-resolve
 ```
 
-** PHP7.4 **
+**PHP7.4**
 ```
 sudo yum install epel-release yum-utils -y
 sudo yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
@@ -84,7 +104,7 @@ sudo yum-config-manager --enable remi-safe
 sudo yum install php74 php74-php php74-php-mysql php74-php-mcrypt php74-php-pecl-imagick
 ```
 
-** Docker and Openmaptiles **
+**Docker and Openmaptiles**
 ```
 sudo curl -sSL https://get.docker.com/ | sh
 sudo mkdir -p /opt/openmaptiles
@@ -92,13 +112,13 @@ sudo docker run -d --rm -t -v $/opt/openmaptiles:/data -p 8090:80 --name openmap
 ```
 You can access openmaptiles through the Web: http://<ip>:8090 (Downloading Maps for personal use is free).
 
-** Copy Data from Repositiry **
+**Copy Data from Repositiry**
 ```
 sudo rm -f /var/www/html/*
 git clone https://github.com/japalie/aprs-frontent /var/www/html
 ```
 
-** Start Services **
+**Start Services**
 ```
 sudo systemctl start httpd.service
 sudo systemctl enable httpd.service
@@ -106,7 +126,7 @@ sudo systemctl start mariadb.service
 sudo systemctl enable mariadb.service
 ```
 
-** Configure DB **
+**Configure DB**
 Load Schema from [aprs2mysql](japalie/aprs2mysql) and add a filter table:
 ```
 CREATE TABLE `filter` (
