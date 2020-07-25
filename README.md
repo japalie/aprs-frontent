@@ -162,3 +162,12 @@ $_CONFIG["aprs"]["purgeafter"] = 48; // in hours
 $_CONFIG["aprs"]["sessionkey"] = "********"; // For Session Encryption
 ?>
 ```
+
+**Add Cronjob for cleanup the Database**
+```
+echo "SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+MAILTO=root
+*/15 * * * * root curl http://localhost/api.php?act=cleanup
+" > /etc/cron.d/aprsdb
+```
