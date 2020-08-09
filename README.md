@@ -171,3 +171,10 @@ MAILTO=root
 */15 * * * * root curl http://localhost/api.php?act=cleanup
 " > /etc/cron.d/aprsdb
 ```
+
+**Firewalld**
+```
+firewall-cmd --permanent --zone=public --add-port=80/tcp
+
+systemctl restart firewalld
+```
